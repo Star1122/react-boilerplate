@@ -3,19 +3,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MomentUtils from '@date-io/moment';
 
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './style.scss';
 
 import store, { history } from './store';
 import App from './App';
-
+import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <CssBaseline />
+          <App />
+        </MuiPickersUtilsProvider>
+      </ThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
